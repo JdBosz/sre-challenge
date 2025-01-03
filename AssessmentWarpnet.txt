@@ -1,0 +1,56 @@
+Day 1:
+1. Downloading VirtualBox
+2. Get ubuntu image
+3. Set-up
+	3.1 sudo apt install git
+	3.2 Fork the repo
+	3.3 Clone repo
+	3.3 Install docker
+	3.4 Install minikube
+4. Run Flask app op de VM
+
+
+5. Aanpassen Flask-code
+
+5.1 authenticate function
+	- Query geüpdatet door gebruik te maken van geparameteriseerde queries. Hierdoor SQL-injections voorkomen.
+
+5.2 authenticate function/database
+	- bcrypt gebruikt voor het hashen van wachtwoorden zodat ze niet in plain tekst staan
+	
+5.3 randomized secret_key
+	- Fixed that secret_key is randomized
+
+5.5 Scheiden css en html
+	- css in apart bestand
+	Klein dingetje, maar ziet er iets netter en overzichtelijker uit.
+
+
+Day 2:
+6. Overbrengen naar kubernetes (minikube)
+
+6.1 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+	sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+6.2	sudo apt install docker.io -y
+	sudo usermod -aG docker $USER
+
+6.3	docker build -t flask-app:v1.0 .
+
+6.4	minikube start
+
+6.5	eval $(minikube docker -env)
+
+6.5	Aanmaken manifest.yaml 
+
+6.6	kubectl apply -f manifest.yaml
+
+7. Git push 
+
+
+Gevolgde guides:
+https://www.youtube.com/watch?v=cYObRCAb1Fs
+https://medium.com/@chroottech/how-to-deploy-python-application-in-docker-kubernetes-1d198f2af2c
+https://snyk.io/blog/secure-python-flask-applications/
+https://pypi.org/project/bcrypt/
+https://flask-security-too.readthedocs.io/en/stable/
