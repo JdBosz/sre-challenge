@@ -28,9 +28,9 @@ def is_authenticated():
     return False
 
 def authenticate(username, password):
-    """Authenticeert een gebruiker met gegeven gebruikersnaam en wachtwoord."""
+    """Authenticate de user dmv username en password."""
     if not username or not password:
-        app.logger.warning("Gebruikersnaam of wachtwoord ontbreekt.")
+        app.logger.warning("username or password missing...")
         return False
 
     connection = get_db_connection()
@@ -46,14 +46,14 @@ def authenticate(username, password):
 
             # comparte password with hash password
             if bcrypt.checkpw(password.encode('utf-8'), stored_hash):  # compare with bcrypt
-                app.logger.info(f"De gebruiker '{username}' is succesvol ingelogd.")
+                app.logger.info(f"The user '{username}' has logged in succesfully.")
                 session["username"] = username
                 return True
             else:
-                app.logger.warning(f"Mislukte inlogpoging voor gebruiker '{username}', wachtwoord is incorrect.")
+                app.logger.warning(f" failed loging attempt for user '{username}', password incorrect.")
                 return False
         else:
-            app.logger.warning(f"Gebruiker '{username}' bestaat niet.")
+            app.logger.warning(f"User '{username}' does not existig.")
             return False
     finally:
         connection.close()
@@ -65,7 +65,7 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Behandelt het inloggen van de gebruiker."""
+    """Handles the log-in of user."""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
