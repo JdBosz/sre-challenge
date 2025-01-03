@@ -10,12 +10,6 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(24))
 #app.secret_key = b"192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf"
 app.logger.setLevel(logging.INFO)
 
-# session-cookies
-app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["SESSION_COOKIE_SECURE"] = True 
-app.config["SESSION_COOKIE_SAMESITE"] = "None"
-
-
 def get_db_connection():
     connection = sqlite3.connect("database.db")
     connection.row_factory = sqlite3.Row

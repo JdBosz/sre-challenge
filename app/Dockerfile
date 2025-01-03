@@ -8,6 +8,9 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 COPY . .
 
+# Check if alles wordt meegenomen
+RUN ls -l /app
+
 # Instal Python-dependecies
 RUN pip install --no-cache-dir -r requirements.txt
 
